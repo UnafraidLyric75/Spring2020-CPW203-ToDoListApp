@@ -4,24 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List App</title>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
 </head>
 <body>
     <h1>ToDo List</h1>
-    <form>
-        <label for="title">Title</label>
-        <input id="title" type="text">
-        <span>*</span>
-        <br>
 
-        <label for="due-date">Due Date</label>
-        <input id="due-date" type="date">
-        <br>
-    
-        <input type="checkbox">
-        <label for="is-Complete">Is Complete?</label>
-        <br>
-    
-        <input type="button" value="Add ToDo Item">
-    </form>
+    <label for="title">Title</label>
+    <input type="text" id="title">
+    <span>*</span>
+    <br>
+
+    <label for="due-date">Due Date</label>
+    <input type="text" id="due-date">
+    <span>*</span>
+    <br>
+
+    <input id="is-complete" type="checkbox">
+    <label for="is-complete">Is Complete?</label>
+    <br>
+
+    <input type="button" id="add" value="Add ToDo Item">
+    <br>
+
+    <h3>ToDo Items</h3>
+    <div id="incomplete-items"></div>
+    <div id="complete-items"></div>
+
+    <script src="https://unpkg.com/js-datepicker"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

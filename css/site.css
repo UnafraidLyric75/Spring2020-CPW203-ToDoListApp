@@ -1,0 +1,48 @@
+.todo{
+    width: 20%;
+    box-sizing: border-box;
+    background-color: lightblue;
+    padding: .5em;
+    border-radius: .75em;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.todo h3{
+    margin: 0px;
+}
+
+.todo p{
+    margin: 0px;
+}
+
+.completed{
+    opacity: 35%;
+    background-color: lightgreen;
+    text-decoration: line-through;
+}
+
+#complete-items{
+    border: .2em solid blue;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+#incomplete-items{
+    border: .1em solid black;
+    margin-bottom: 1em;
+    width: 50%;
+    box-sizing:border-box;
+}
+
+#all-items{
+    display:flex;
+}
+
+#complete-items, #incomplete-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}

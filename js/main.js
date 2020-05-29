@@ -25,7 +25,11 @@ function main() {
     }
 }
 function isValid() {
-    return true;
+    isValidDueDate();
+    if (isTextPresent("title", "A title is is required") && isValidDueDate()) {
+        return true;
+    }
+    return false;
 }
 function getToDoItem() {
     var myItem = new ToDoItem();
@@ -85,4 +89,27 @@ function getToDoItems() {
     var itemString = localStorage.getItem(todokey);
     var item = JSON.parse(itemString);
     return item;
+}
+function isValidDueDate() {
+    var isValidDueDateInput = getInput("due-date");
+    var isValidDueDate = new Date(isValidDueDateInput.value);
+    if (isValidDate(isValidDueDate.toString())) {
+        return true;
+    }
+    var errSpan = isValidDueDateInput.nextElementSibling;
+    errSpan.innerText = "A date is needed ex. Fri Oct 32 2076";
+}
+function isTextPresent(id, errMsg) {
+    var txtBox = document.getElementById(id);
+    var txtBoxValue = txtBox.value;
+    if (txtBoxValue.trim() == "" || txtBoxValue.trim() == null) {
+        var errSpan = txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+    return true;
+}
+function isValidDate(input) {
+    var pattern = /([\d]+)([\-\./])([\d]+)([\-\./])([\d]+)|((Jan(|uary)|Feb(|ruary)|Mar(|ch)|Apr(|il)|May|Jun(|e)|Jul(|y)|Aug(|ust)|Sept(|ember)|Oct(|ober)|(Nov|Dec)(|ember))([\s\-])(|([\d]+){1,2}([\s\-]|\, ))([\d]+){4})/g;
+    return pattern.test(input);
 }

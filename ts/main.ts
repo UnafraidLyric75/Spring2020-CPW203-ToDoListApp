@@ -42,7 +42,11 @@ function main(){
  * Check form data is valid
  */
 function isValid():boolean{
-    return true;
+    isValidDueDate();
+    if(isTextPresent("title", "A title is is required") && isValidDueDate()){
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -145,4 +149,34 @@ function getToDoItems():ToDoItem[]{
     let itemString = localStorage.getItem(todokey);
     let item:ToDoItem[] = JSON.parse(itemString);
     return item;
+}
+
+function isValidDueDate():boolean{
+    let isValidDueDateInput = getInput("due-date");
+    let isValidDueDate = new Date(isValidDueDateInput.value);
+    if(isValidDate(isValidDueDate.toString())){
+        return true;
+    }
+    let errSpan = <HTMLSpanElement>isValidDueDateInput.nextElementSibling;
+    errSpan.innerText = "A date is needed ex. Fri Oct 32 2076";
+    // Fri Oct 23 2076
+    //
+}
+
+function isTextPresent(id:string, errMsg:string):boolean {
+    let txtBox = <HTMLInputElement>document.getElementById(id);
+    let txtBoxValue = txtBox.value;
+    if (txtBoxValue.trim() == "" || txtBoxValue.trim() == null) {
+        let errSpan = <HTMLSpanElement>txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+    return true;
+}
+
+
+function isValidDate(input:string):boolean{
+    // Validating mm/dd/yyyy and m/d/yyyy
+    let pattern = /([\d]+)([\-\./])([\d]+)([\-\./])([\d]+)|((Jan(|uary)|Feb(|ruary)|Mar(|ch)|Apr(|il)|May|Jun(|e)|Jul(|y)|Aug(|ust)|Sept(|ember)|Oct(|ober)|(Nov|Dec)(|ember))([\s\-])(|([\d]+){1,2}([\s\-]|\, ))([\d]+){4})/g;
+    return pattern.test(input);
 }
